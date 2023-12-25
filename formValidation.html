@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+<body>
+    <style>
+
+        body {
+            justify-content: center;
+            display: flex;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .error-border {
+            border: 1px solid red;
+        }
+        
+        form {
+            padding: 35px 50px;
+            width: 300px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 8px;
+            box-sizing: border-box;
+          }
+        
+        
+    </style>
+    <form id="myForm" onsubmit="validateForm(event)">
+        <label for="nama">Nama Pelanggan:</label>
+        <input type="text" id="nama" name="nama">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+
+        <label for="jam">Jam Keberangkatan:</label>
+        <input type="text" id="jam" name="jam">
+
+        <label for="tujuan">Tujuan Keberangkatan:</label>
+        <input type="text" id="tujuan" name="tujuan">
+
+        <label for="jumlahTiket">Jumlah Tiket:</label>
+        <input type="number" id="jumlahTiket" name="jumlahTiket">
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+        
+            var nama = document.getElementById('nama').value;
+            var email = document.getElementById('email').value;
+            var jam = document.getElementById('jam').value;
+            var tujuan = document.getElementById('tujuan').value;
+            var jumlahTiket = document.getElementById('jumlahTiket').value;
+        
+            resetErrorStyles();
+        
+            if (nama === "" || nama.length > 30) {
+                displayError("Nama Pelanggan harus diisi (maksimum 30 karakter)", 'nama');
+                return;
+            }
+        
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === "" || !emailRegex.test(email)) {
+                displayError("Email harus diisi dengan format yang benar", 'email');
+                return;
+            }
+        
+            var jamRegex = /^(0[0-9]|1[0-9]|2[0-3])\.[0-5][0-9]$/;
+            if (jam === "" || !jamRegex.test(jam)) {
+                displayError("Jam Keberangkatan harus diisi dengan format yang benar (00.00 - 23.59)", 'jam');
+                return;
+            }
+        
+            if (tujuan === "") {
+                displayError("Tujuan Keberangkatan harus diisi", 'tujuan');
+                return;
+            }
+        
+            if (jumlahTiket === "" || isNaN(jumlahTiket) || jumlahTiket < 1 || jumlahTiket > 10 || parseInt(jumlahTiket) !== parseFloat(jumlahTiket)) {
+                displayError("Jumlah Tiket harus diisi dengan angka bulat antara 1 - 10", 'jumlahTiket');
+                return;
+            }
+        
+            displayFormData(nama, email, jam, tujuan, jumlahTiket);
+        }
+        
+        function displayError(errorMessage, inputId) {
+            var errorDiv = document.createElement('div');
+            errorDiv.innerHTML = errorMessage;
+            errorDiv.className = 'error';
+            document.getElementById(inputId).classList.add('error-border');
+            document.getElementById(inputId).parentNode.appendChild(errorDiv);
+        }
+        
+        function resetErrorStyles() {
+            var errorDivs = document.getElementsByClassName('error');
+            for (var i = 0; i < errorDivs.length; i++) {
+                errorDivs[i].parentNode.removeChild(errorDivs[i]);
+            }
+        
+            var inputs = document.getElementsByTagName('input');
+            for (var j = 0; j < inputs.length; j++) {
+                inputs[j].classList.remove('error-border');
+            }
+        }
+        
+        function displayFormData(nama, email, jam, tujuan, jumlahTiket) {
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h2>Form Data:</h2>
+                <p><strong>Nama Pelanggan:</strong> ${nama}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Jam Keberangkatan:</strong> ${jam}</p>
+                <p><strong>Tujuan Keberangkatan:</strong> ${tujuan}</p>
+                <p><strong>Jumlah Tiket:</strong> ${jumlahTiket}</p>
+            `;
+        }
+        
+    </script>
+</body>
+</html>

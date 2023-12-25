@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Picker</title>
+</head>
+<body>
+    <label for="foto">Pilih Gambar:</label>
+    <select id="foto" onchange="image()">
+        <option id="img1">image 1</option>
+        <option id="img2">image 2</option>
+        <option id="img3">image 3</option>
+        <option id="img4">image 4</option>
+        <option id="img5">image 5</option>
+        <option id="img6">image 6</option>
+    </select>
+    <br/>
+
+    <img src="foto1.jpg" id="gambarpilih" width="300" style="margin-top: 20px;"/>
+
+    <script>
+        function image() {
+            let pilih = document.getElementById("foto").value;
+            let pilihfoto = document.getElementById("gambarpilih");
+    
+            if (pilih == "image 1") {
+                pilihfoto.src = " foto1.jpg";
+                alert("ini foto1.jpg");
+            } else if (pilih == "image 2") {
+                pilihfoto.src = "foto2.jpg";
+                alert("ini foto2.jpg");
+            } else if (pilih == "image 3") {
+                pilihfoto.src = "foto3.jpg";
+                alert("ini foto3,jpg");
+            } else if (pilih == "image 4") {
+                pilihfoto.src = "foto4.jpg";
+                alert("ini foto4.jpg");
+            } else if (pilih == "image 5") {
+                pilihfoto.src = "foto5.jpg";
+                alert("ini foto,jpg");
+            } else if (pilih == "image 6") {
+                pilihfoto.src = "foto6.webp";
+                alert("ini foto.webp");
+            }
+        }
+    
+        document.getElementById("foto").valuec
+    </script>
+
+</body>
+</html>

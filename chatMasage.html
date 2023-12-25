@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>chat masage</title>
+</head>
+<body>
+    <style>
+
+    #chatbox {
+        max-width: 400px;
+        margin: 20px auto;
+        border: 1px solid green;
+        padding: 20px;
+        border-radius: 10px;
+      }
+      
+      #chat-messages {
+        height: 400px;
+        overflow-y: scroll;
+        border-bottom: 1px solid #ccc;
+      }
+      
+      #user-input {
+        display: flex;
+      }
+      
+      #message-input {
+        flex: 1;
+        padding: 5px;
+        border: 1px solid green;
+        border-radius: 3px;
+      }
+      
+      button {
+        padding: 10px;
+        margin-left: 9px;
+        cursor: pointer;
+        border: solid green;
+      }
+    </style>
+      
+  <div id="chatbox">
+    <div id="chat-messages"></div>
+    <div id="user-input">
+      <input type="text" id="message-input" placeholder="Kirim pesan mu...">
+      <button onclick="kirimPesan()">kirim</button>
+    </div>
+  </div>
+
+  <script>
+    function kirimPesan() {
+        var messageInput = document.getElementById("message-input");
+        var message = messageInput.value;
+      
+        if (message.trim() !== "") {
+          var chatMessages = document.getElementById("chat-messages");
+          var newMessage = document.createElement("div");
+          newMessage.className = "message";
+          newMessage.textContent = "" + message;
+          chatMessages.appendChild(newMessage);
+
+          messageInput.value = "";
+      
+          setTimeout(function() {
+            var reply = document.createElement("div");
+            reply.className = "message";
+           
+            chatMessages.appendChild(reply);
+      
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }, 500);
+        }
+      }
+      
+  </script>
+</body>
+</html>

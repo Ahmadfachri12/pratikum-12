@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurs Rupiah</title>
+</head>
+<body>
+    <style>
+     table {
+        border-collapse: collapse;
+        width: 80%;
+        margin: 20px;
+        background-color: burlywood;
+     }
+     
+     td, th { 
+        border: 2px solid black;
+        padding: 5px;
+     }
+     
+    </style>
+    <fieldset>
+        <legend>Kurs Rupiah - Mata Uang Asing</legend>
+        <table>
+            <tr>
+                <th>Masukan Nilai</th>
+                <th>Valas</th>
+                <th>Nilai Rupiah</th>
+            </tr>
+            <tr>
+            <td><input type="number" id="inputan" onchange="kalkulator()"></td> 
+
+                    <td><select name="" id="matauang" onchange="kalkulator()">
+                        <option value="">Pilih Mata Uang</option>
+                        <option value="9915">Dollar US</option>
+                        <option value="13472">Dollar Singgapure</option>
+                        <option value="874">Ringgit Malaysia</option>
+                        <option value="120">Yen jepang</option>
+                        <option value="15888">Euro</option>
+                        <option value="3592">Riyal Arab Saudi</option>
+                    </select>
+                </td>
+                <td>
+                    <p id="hitung"></p>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <script>
+        function kalkulator(){
+            let input = document.getElementById("inputan").value;
+            let mata_uang = document.getElementById("matauang").value;
+
+            console.log(input * mata_uang);
+
+            let area_hasil = document.getElementById("hitung");
+            area_hasil.innerHTML = input * mata_uang;
+
+        }
+    </script>
+</body>
+</html>
